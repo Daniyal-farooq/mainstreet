@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { MapPin, Phone, Clock, Mail, Send, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { AnimatedPageHero } from "@/components/animated-about-hero"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -22,14 +23,14 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    
+
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
-    
+
     // Reset success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000)
   }
@@ -42,9 +43,9 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
@@ -57,17 +58,13 @@ export default function ContactPage() {
           />
           <div className="absolute inset-0 bg-secondary/80" />
         </div>
-        
-        <div className="relative z-10 text-center px-4">
-          <p className="text-primary text-sm uppercase tracking-[0.2em] mb-3">
-            Get In Touch
-          </p>
-          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-4">
-            Contact Us
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We would love to hear from you. Reach out for reservations, inquiries, or feedback.
-          </p>
+
+        <div className="relative z-10">
+          <AnimatedPageHero
+            subtitle="Get In Touch"
+            title="Contact Us"
+            description="We would love to hear from you. Reach out for reservations, inquiries, or feedback."
+          />
         </div>
       </section>
 
@@ -288,7 +285,7 @@ export default function ContactPage() {
       {/* Google Maps */}
       <section className="h-[500px] relative">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.8761776692584!2d73.0731891!3d31.4247222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392269f3bfffffe7%3A0x1b5c8b43b0e33b2e!2sKohinoor%20City%2C%20Faisalabad%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.6899123456789!2d73.1160442!3d31.4136761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392269b9638bb4d7%3A0x5ed439c33fb64a6e!2sMain%20Street%20Cafe!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s"
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -298,7 +295,7 @@ export default function ContactPage() {
           title="Main Street Cafe Location"
           className="grayscale hover:grayscale-0 transition-all duration-500"
         />
-        
+
         {/* Map Overlay Card */}
         <div className="absolute bottom-8 left-4 sm:left-8 bg-card p-6 shadow-xl max-w-sm">
           <h3 className="text-xl font-bold text-card-foreground mb-2">
@@ -308,7 +305,7 @@ export default function ContactPage() {
             C478+FCF, Owais Rd, Kohinoor City, Madina Town, Faisalabad
           </p>
           <a
-            href="https://www.google.com/maps/dir//Kohinoor+City,+Faisalabad,+Punjab,+Pakistan"
+            href="https://www.google.com/maps/place/Main+Street+Cafe/@31.4136519,73.1163679,18z/data=!4m6!3m5!1s0x392269b9638bb4d7:0x5ed439c33fb64a6e!8m2!3d31.4136761!4d73.1160442!16s%2Fg%2F11hxt_7s2_?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm transition-colors"

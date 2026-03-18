@@ -6,6 +6,8 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { X } from "lucide-react"
+import { AnimatedPageHero } from "@/components/animated-about-hero"
+import { AnimatedGalleryGrid } from "@/components/animated-gallery-grid"
 
 const galleryImages = [
   {
@@ -81,9 +83,9 @@ export default function GalleryPage() {
     : galleryImages.filter(img => img.category === selectedCategory)
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
@@ -96,17 +98,13 @@ export default function GalleryPage() {
           />
           <div className="absolute inset-0 bg-secondary/80" />
         </div>
-        
-        <div className="relative z-10 text-center px-4">
-          <p className="text-primary text-sm uppercase tracking-[0.2em] mb-3">
-            Visual Journey
-          </p>
-          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-4">
-            Gallery
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A glimpse into the flavors and ambiance of Main Street Cafe
-          </p>
+
+        <div className="relative z-10">
+          <AnimatedPageHero
+            subtitle="Visual Journey"
+            title="Gallery"
+            description="A glimpse into the flavors and ambiance of Main Street Cafe"
+          />
         </div>
       </section>
 
@@ -134,27 +132,7 @@ export default function GalleryPage() {
       {/* Gallery Grid */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredImages.map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-square overflow-hidden cursor-pointer group"
-                onClick={() => setLightboxImage(image.src)}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/60 transition-colors duration-300 flex items-center justify-center">
-                  <span className="text-primary-foreground font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-4">
-                    {image.alt}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <AnimatedGalleryGrid images={filteredImages} onImageClick={setLightboxImage} />
         </div>
       </section>
 
@@ -193,7 +171,7 @@ export default function GalleryPage() {
             Visit Us Today
           </h2>
           <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-            Pictures can only tell part of the story. Come experience the flavors, 
+            Pictures can only tell part of the story. Come experience the flavors,
             aromas, and ambiance of Main Street Cafe in person.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

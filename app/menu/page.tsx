@@ -3,6 +3,8 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import type { Metadata } from "next"
+import { AnimatedMenuHero } from "@/components/animated-menu-hero"
+import { AnimatedMenuCategory, AnimatedMenuItem } from "@/components/animated-menu-category"
 
 export const metadata: Metadata = {
   title: "Menu - Main Street Cafe | Faisalabad",
@@ -171,9 +173,9 @@ const menuCategories = [
 
 export default function MenuPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
@@ -186,17 +188,9 @@ export default function MenuPage() {
           />
           <div className="absolute inset-0 bg-secondary/80" />
         </div>
-        
-        <div className="relative z-10 text-center px-4">
-          <p className="text-primary text-sm uppercase tracking-[0.2em] mb-3">
-            Explore Our
-          </p>
-          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-4">
-            Menu
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover our carefully curated selection of dishes, crafted with passion and served with love
-          </p>
+
+        <div className="relative z-10">
+          <AnimatedMenuHero />
         </div>
       </section>
 
@@ -220,48 +214,34 @@ export default function MenuPage() {
       {/* Menu Categories */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {menuCategories.map((category, categoryIndex) => (
-            <div
+          {menuCategories.map((category) => (
+            <AnimatedMenuCategory
               key={category.id}
               id={category.id}
-              className="mb-20 last:mb-0 scroll-mt-40"
+              name={category.name}
+              subtitle={category.subtitle}
             >
-              <div className="text-center mb-12">
-                <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  {category.name}
-                </h2>
-                <p className="text-muted-foreground uppercase tracking-wider text-sm">
-                  {category.subtitle}
-                </p>
-                <div className="w-20 h-1 bg-primary mx-auto mt-4" />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {category.items.map((item, itemIndex) => (
-                  <div
-                    key={`${category.id}-${itemIndex}`}
-                    className="flex items-start justify-between p-6 border border-border hover:border-primary transition-colors group"
-                  >
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {item.name}
-                      </h3>
-                      {item.variant && (
-                        <p className="text-muted-foreground text-sm mt-1">
-                          {item.variant}
-                        </p>
-                      )}
-                    </div>
-                    <div className="ml-4 text-right">
-                      <span className="text-2xl font-bold text-primary">
-                        {item.price}
-                      </span>
-                      <span className="text-primary text-sm">/-</span>
-                    </div>
+              {category.items.map((item, itemIndex) => (
+                <AnimatedMenuItem key={`${category.id}-${itemIndex}`}>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {item.name}
+                    </h3>
+                    {item.variant && (
+                      <p className="text-muted-foreground text-sm mt-1">
+                        {item.variant}
+                      </p>
+                    )}
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="ml-4 text-right">
+                    <span className="text-2xl font-bold text-primary">
+                      {item.price}
+                    </span>
+                    <span className="text-primary text-sm">/-</span>
+                  </div>
+                </AnimatedMenuItem>
+              ))}
+            </AnimatedMenuCategory>
           ))}
         </div>
       </section>
